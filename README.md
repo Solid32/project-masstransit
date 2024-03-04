@@ -1,2 +1,2 @@
 # project-masstransit
-front and back end little project event driven
+front and backend little project event driven
