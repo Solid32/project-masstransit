@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/chinzi/code/Solid32/GettingStarted/GettingStarted.csproj": {}
+    "/home/chinzi/code/Solid32/project-masstransit/GettingStarted.csproj": {}
   },
   "projects": {
-    "/home/chinzi/code/Solid32/GettingStarted/GettingStarted.csproj": {
+    "/home/chinzi/code/Solid32/project-masstransit/GettingStarted.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/chinzi/code/Solid32/GettingStarted/GettingStarted.csproj",
+        "projectUniqueName": "/home/chinzi/code/Solid32/project-masstransit/GettingStarted.csproj",
         "projectName": "GettingStarted",
-        "projectPath": "/home/chinzi/code/Solid32/GettingStarted/GettingStarted.csproj",
+        "projectPath": "/home/chinzi/code/Solid32/project-masstransit/GettingStarted.csproj",
         "packagesPath": "/home/chinzi/.nuget/packages/",
-        "outputPath": "/home/chinzi/code/Solid32/GettingStarted/obj/",
+        "outputPath": "/home/chinzi/code/Solid32/project-masstransit/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/chinzi/code/Solid32/nuget.config",
@@ -45,10 +45,6 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "CsvHelper": {
-              "target": "Package",
-              "version": "[31.0.2, )"
-            },
             "MassTransit": {
               "target": "Package",
               "version": "[8.1.3, )"

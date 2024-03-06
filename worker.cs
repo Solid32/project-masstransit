@@ -23,7 +23,7 @@ namespace GettingStarted
                 //Console.WriteLine("Publishing HelloMessage with name 'World'");
                 //await _bus.Publish(new IHelloMessage { Name = "World" }, stoppingToken);
 
-                await Task.Delay(1000, stoppingToken);
+                await Task.Delay(10000, stoppingToken);
             }
         }
     }

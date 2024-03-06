@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Consumers
 {
-    public class GettingStartedConsumer : IConsumer<IHelloMessage>
+    public class CsvConsumer : IConsumer<IHelloMessage>
     {
           static readonly string quoteFile = "data/quotes.csv";
           static readonly string countQuotes = "data/count_quotes.csv";

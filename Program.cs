@@ -35,13 +35,13 @@ namespace GettingStarted
                                      ep.ClearSerialization();
                                      //ep.UseRawJsonDeserializer();
                                      ep.UseRawJsonSerializer(RawSerializerOptions.AddTransportHeaders | RawSerializerOptions.CopyHeaders);
-                                     ep.ConfigureConsumer<GettingStartedConsumer>(context);
+                                     ep.ConfigureConsumer<CsvConsumer>(context);
                                      ep.ConfigureConsumeTopology = false;
                                 });
                         });
 
 
-                        x.AddConsumer<GettingStartedConsumer>();
+                        x.AddConsumer<CsvConsumer>();
                     });
 
                     services.AddHostedService<Worker>();
