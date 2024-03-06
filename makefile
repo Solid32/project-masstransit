@@ -12,3 +12,8 @@ run_docker:
 install_requirements: 
 				pip install streamlit
 				pip install pika
+				
+first_setup:		
+				rabbitmqadmin declare exchange name=Contracts:IHelloMessage type=fanout
+				rabbitmqadmin declare queue name=GettingStarted
+				rabbitmqadmin declare binding source=Contracts:IHelloMessage destination_type=queue destination=GettingStarted routing_key=IHelloContracts

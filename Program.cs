@@ -30,14 +30,14 @@ namespace GettingStarted
                             });
 
                               //cfg.ConfigureEndpoints(context);
-                             cfg.ReceiveEndpoint("GettingStarted", ep =>
-                                {
-                                     ep.ClearSerialization();
-                                     //ep.UseRawJsonDeserializer();
-                                     ep.UseRawJsonSerializer(RawSerializerOptions.AddTransportHeaders | RawSerializerOptions.CopyHeaders);
-                                     ep.ConfigureConsumer<CsvConsumer>(context);
-                                     ep.ConfigureConsumeTopology = false;
-                                });
+                               cfg.ReceiveEndpoint("GettingStarted", ep =>
+                                  {
+                                       ep.ClearSerialization();
+                                       //ep.UseRawJsonDeserializer();
+                                       ep.UseRawJsonSerializer(RawSerializerOptions.AddTransportHeaders | RawSerializerOptions.CopyHeaders);
+                                       ep.ConfigureConsumer<CsvConsumer>(context);
+                                       ep.ConfigureConsumeTopology = false;
+                                  });
                         });
 
 
