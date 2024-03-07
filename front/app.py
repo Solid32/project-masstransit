@@ -3,6 +3,7 @@ import pika
 import json
 import uuid
 from datetime import datetime
+import time
 
 connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
 channel = connection.channel()
@@ -15,8 +16,11 @@ message_data = {
     "Timestamp": datetime.now().isoformat(),
     "Name": message
 }
+def wait() :
+    time.sleep(2)
+    return None
 
-if st.button('Envoyer'):
+if st.button('Envoyer', on_click=wait()):
     channel.basic_publish(exchange='Contracts:IHelloMessage',
                           routing_key='',
                           body=json.dumps(message_data))
