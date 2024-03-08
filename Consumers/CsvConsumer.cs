@@ -24,7 +24,7 @@ namespace Consumers
   public class CsvConsumerQuotes : IConsumer<IQuoteFormatted>
   {
     static readonly string quoteFile = "data/quotes.csv";
-    static readonly string separator = ",";
+
     public Task Consume(ConsumeContext<IQuoteFormatted> context)
     {
       string messagecsv1 = context.Message.Name;
