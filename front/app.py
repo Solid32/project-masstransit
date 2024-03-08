@@ -12,7 +12,6 @@ channel = connection.channel()
 st.title('QuotesCollective')
 message = st.text_input('Enter votre citation:')
 message_data = {
-    "Id": str(uuid.uuid4()),
     "Timestamp": datetime.now().isoformat(),
     "Name": message
 }

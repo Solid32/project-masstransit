@@ -37,40 +37,37 @@ namespace GettingStarted
                                 ep.ConfigureConsumer<MsgConsumer>(context);
                                 ep.ConfigureConsumeTopology = false;
                               });
-                      cfg.ReceiveEndpoint("Contracts:IQuoteFormatted", ep =>
+                      //cfg.ReceiveEndpoint("Contracts:IQuoteFormatted", ep =>
+                      //       {
+                      //          ep.ClearSerialization();
+                      //          ep.UseRawJsonSerializer();
+                      //          ep.UseRawJsonDeserializer();
+                      //          ep.ConfigureConsumeTopology = true;
+                      //        });
+                      cfg.ReceiveEndpoint("Contracts:IQuoteFormattedQuotes", ep =>
                              {
                                 ep.ClearSerialization();
                                 ep.ConfigureConsumer<CsvConsumerQuotes>(context);
+                                ep.UseRawJsonSerializer();
+                                ep.UseRawJsonDeserializer();
+                                ep.ConfigureConsumeTopology = true;
+                              });
+                      cfg.ReceiveEndpoint("Contracts:IQuoteFormattedLog", ep =>
+                             {
+                                ep.ClearSerialization();
                                 ep.ConfigureConsumer<CsvConsumerLog>(context);
+                                ep.UseRawJsonSerializer();
+                                ep.UseRawJsonDeserializer();
+                                ep.ConfigureConsumeTopology = true;
+                              });
+                      cfg.ReceiveEndpoint("Contracts:IQuoteFormattedCount", ep =>
+                             {
+                                ep.ClearSerialization();
                                 ep.ConfigureConsumer<CsvConsumerCount>(context);
                                 ep.UseRawJsonSerializer();
                                 ep.UseRawJsonDeserializer();
-                                ep.ConfigureConsumeTopology = false;
+                                ep.ConfigureConsumeTopology = true;
                               });
-                      //cfg.ReceiveEndpoint("Contracts:IQuoteFormattedQuotes", ep =>
-                      //       {
-                      //          ep.ClearSerialization();
-                      //          ep.ConfigureConsumer<CsvConsumerQuotes>(context);
-                      //          ep.UseRawJsonSerializer();
-                      //          ep.UseRawJsonDeserializer();
-                      //          ep.ConfigureConsumeTopology = false;
-                      //        });
-                      //cfg.ReceiveEndpoint("Contracts:IQuoteFormattedLogs", ep =>
-                      //       {
-                      //          ep.ClearSerialization();
-                      //          ep.ConfigureConsumer<CsvConsumerLog>(context);
-                      //          ep.UseRawJsonSerializer();
-                      //          ep.UseRawJsonDeserializer();
-                      //          ep.ConfigureConsumeTopology = false;
-                      //        });
-                      //cfg.ReceiveEndpoint("Contracts:IQuoteFormattedCount", ep =>
-                      //       {
-                      //          ep.ClearSerialization();
-                      //          ep.ConfigureConsumer<CsvConsumerCount>(context);
-                      //          ep.UseRawJsonSerializer();
-                      //          ep.UseRawJsonDeserializer();
-                      //          ep.ConfigureConsumeTopology = false;
-                      //        });
                       });
 
 

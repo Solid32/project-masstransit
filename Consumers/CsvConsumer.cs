@@ -4,7 +4,6 @@ using MassTransit;
 using Contracts;
 using System.IO;
 using System.Linq;
-using MassTransit.Serialization;
 
 namespace Consumers
 {
@@ -14,7 +13,6 @@ namespace Consumers
     {
       var formattedQuote = new MyMessage{
         Name = context.Message.Name,
-        Id = context.Message.Id,
         Timestamp = context.Message.Timestamp
         };
       context.Publish<IQuoteFormatted>(formattedQuote);

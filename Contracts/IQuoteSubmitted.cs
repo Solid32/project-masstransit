@@ -3,7 +3,6 @@ namespace Contracts
   public interface IQuoteSubmitted
   {
     public string Name { get; set; }
-    public string Id { get; set; }
     public string Timestamp { get; set; }
   }
 
@@ -11,7 +10,7 @@ namespace Contracts
   public interface IQuoteFormatted
   {
     public string Name { get; set; }
-    public string Id { get; set; }
     public string Timestamp { get; set; }
   }
+
 }
