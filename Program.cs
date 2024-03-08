@@ -29,7 +29,6 @@ namespace GettingStarted
                           h.Password("guest");
                         });
 
-                        //cfg.ConfigureEndpoints(context);
                       cfg.ReceiveEndpoint("Contracts:IQuoteSubmitted", ep =>
                              {
                                 ep.ClearSerialization();
@@ -37,13 +36,7 @@ namespace GettingStarted
                                 ep.ConfigureConsumer<MsgConsumer>(context);
                                 ep.ConfigureConsumeTopology = false;
                               });
-                      //cfg.ReceiveEndpoint("Contracts:IQuoteFormatted", ep =>
-                      //       {
-                      //          ep.ClearSerialization();
-                      //          ep.UseRawJsonSerializer();
-                      //          ep.UseRawJsonDeserializer();
-                      //          ep.ConfigureConsumeTopology = true;
-                      //        });
+
                       cfg.ReceiveEndpoint("Contracts:IQuoteFormattedQuotes", ep =>
                              {
                                 ep.ClearSerialization();
