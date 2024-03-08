@@ -1,6 +1,6 @@
 namespace Contracts
 {
-    public class IHelloMessage
+    public class MyMessage : IQuoteSubmitted, IQuoteFormatted
     {
         public string Name { get; set; }
         public string Id { get; set; }

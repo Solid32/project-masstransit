@@ -7,44 +7,81 @@ using Consumers;
 
 namespace GettingStarted
 {
-    public class Program
+  public class Program
+  {
+    public static async Task Main(string[] args)
     {
-        public static async Task Main(string[] args)
-        {
-            await CreateHostBuilder(args).Build().RunAsync();
+      await CreateHostBuilder(args).Build().RunAsync();
 
-        }
+    }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureServices((hostContext, services) =>
-                {
-                    services.AddMassTransit(x =>
-                    {
-                        x.UsingRabbitMq((context, cfg) =>
-                        {
-                            cfg.Host("localhost", "/", h =>
-                            {
-                                h.Username("guest");
-                                h.Password("guest");
-                            });
-
-                              //cfg.ConfigureEndpoints(context);
-                               cfg.ReceiveEndpoint("GettingStarted", ep =>
-                                  {
-                                       ep.ClearSerialization();
-                                       //ep.UseRawJsonDeserializer();
-                                       ep.UseRawJsonSerializer(RawSerializerOptions.AddTransportHeaders | RawSerializerOptions.CopyHeaders);
-                                       ep.ConfigureConsumer<CsvConsumer>(context);
-                                       ep.ConfigureConsumeTopology = false;
-                                  });
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureServices((hostContext, services) =>
+            {
+              services.AddMassTransit(x =>
+                  {
+                  x.UsingRabbitMq((context, cfg) =>
+                      {
+                      cfg.Host("localhost", "/", h =>
+                          {
+                          h.Username("guest");
+                          h.Password("guest");
                         });
 
+                        //cfg.ConfigureEndpoints(context);
+                      cfg.ReceiveEndpoint("Contracts:IQuoteSubmitted", ep =>
+                             {
+                                ep.ClearSerialization();
+                                ep.UseRawJsonSerializer(RawSerializerOptions.AddTransportHeaders | RawSerializerOptions.CopyHeaders);
+                                ep.ConfigureConsumer<MsgConsumer>(context);
+                                ep.ConfigureConsumeTopology = false;
+                              });
+                      cfg.ReceiveEndpoint("Contracts:IQuoteFormatted", ep =>
+                             {
+                                ep.ClearSerialization();
+                                ep.ConfigureConsumer<CsvConsumerQuotes>(context);
+                                ep.ConfigureConsumer<CsvConsumerLog>(context);
+                                ep.ConfigureConsumer<CsvConsumerCount>(context);
+                                ep.UseRawJsonSerializer();
+                                ep.UseRawJsonDeserializer();
+                                ep.ConfigureConsumeTopology = false;
+                              });
+                      //cfg.ReceiveEndpoint("Contracts:IQuoteFormattedQuotes", ep =>
+                      //       {
+                      //          ep.ClearSerialization();
+                      //          ep.ConfigureConsumer<CsvConsumerQuotes>(context);
+                      //          ep.UseRawJsonSerializer();
+                      //          ep.UseRawJsonDeserializer();
+                      //          ep.ConfigureConsumeTopology = false;
+                      //        });
+                      //cfg.ReceiveEndpoint("Contracts:IQuoteFormattedLogs", ep =>
+                      //       {
+                      //          ep.ClearSerialization();
+                      //          ep.ConfigureConsumer<CsvConsumerLog>(context);
+                      //          ep.UseRawJsonSerializer();
+                      //          ep.UseRawJsonDeserializer();
+                      //          ep.ConfigureConsumeTopology = false;
+                      //        });
+                      //cfg.ReceiveEndpoint("Contracts:IQuoteFormattedCount", ep =>
+                      //       {
+                      //          ep.ClearSerialization();
+                      //          ep.ConfigureConsumer<CsvConsumerCount>(context);
+                      //          ep.UseRawJsonSerializer();
+                      //          ep.UseRawJsonDeserializer();
+                      //          ep.ConfigureConsumeTopology = false;
+                      //        });
+                      });
 
-                        x.AddConsumer<CsvConsumer>();
-                    });
 
-                    services.AddHostedService<Worker>();
+
+                  x.AddConsumer<MsgConsumer>();
+                  x.AddConsumer<CsvConsumerQuotes>();
+                  x.AddConsumer<CsvConsumerLog>();
+                  x.AddConsumer<CsvConsumerCount>();
                 });
-    }
+
+              services.AddHostedService<Worker>();
+            });
+  }
 }

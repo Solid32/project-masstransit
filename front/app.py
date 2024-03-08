@@ -21,7 +21,7 @@ def wait() :
     return None
 
 if st.button('Envoyer', on_click=wait()):
-    channel.basic_publish(exchange='Contracts:IHelloMessage',
+    channel.basic_publish(exchange='Contracts:IQuoteSubmitted',
                           routing_key='',
                           body=json.dumps(message_data))
     st.success('Message sent successfully')

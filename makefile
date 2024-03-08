@@ -14,6 +14,6 @@ install_requirements:
 				pip install pika
 				
 first_setup:		
-				rabbitmqadmin declare exchange name=Contracts:IHelloMessage type=fanout
+				rabbitmqadmin declare exchange name=Contracts:IQuoteSubmitted type=fanout
 				rabbitmqadmin declare queue name=GettingStarted
-				rabbitmqadmin declare binding source=Contracts:IHelloMessage destination_type=queue destination=GettingStarted routing_key=IHelloContracts
+				rabbitmqadmin declare binding source=Contracts:IQuoteSubmitted destination_type=queue destination=GettingStarted routing_key=IHelloContracts
