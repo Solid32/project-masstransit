@@ -61,6 +61,7 @@ namespace GettingStarted
                                 ep.UseRawJsonDeserializer();
                                 ep.ConfigureConsumeTopology = true;
                               });
+                      cfg.ConfigureEndpoints(context);
                       });
 
 

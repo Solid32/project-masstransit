@@ -20,3 +20,6 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+#lock_csv
+ data/.~lock.log_quotes.csv#
+ data/.~lock.quotes.csv#
