@@ -2009,9 +2009,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/chinzi/code/Solid32/project-masstransit/GettingStarted.csproj",
-      "projectName": "GettingStarted",
-      "projectPath": "/home/chinzi/code/Solid32/project-masstransit/GettingStarted.csproj",
+      "projectUniqueName": "/home/chinzi/code/Solid32/project-masstransit/Project-masstransit.csproj",
+      "projectName": "Project-masstransit",
+      "projectPath": "/home/chinzi/code/Solid32/project-masstransit/Project-masstransit.csproj",
       "packagesPath": "/home/chinzi/.nuget/packages/",
       "outputPath": "/home/chinzi/code/Solid32/project-masstransit/obj/",
       "projectStyle": "PackageReference",

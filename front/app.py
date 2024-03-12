@@ -16,7 +16,7 @@ message_data = {
     "Name": message
 }
 def wait() :
-    time.sleep(2)
+    time.sleep(0)
     return None
 
 if st.button('Envoyer', on_click=wait()):

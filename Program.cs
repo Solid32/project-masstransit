@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using Consumers;
+using Company.StateMachines;
 
 namespace GettingStarted
 {
@@ -29,49 +30,20 @@ namespace GettingStarted
                           h.Password("guest");
                         });
 
-                      cfg.ReceiveEndpoint("Contracts:IQuoteSubmitted", ep =>
-                             {
-                                ep.ClearSerialization();
-                                ep.UseRawJsonSerializer(RawSerializerOptions.AddTransportHeaders | RawSerializerOptions.CopyHeaders);
-                                ep.ConfigureConsumer<MsgConsumer>(context);
-                                ep.ConfigureConsumeTopology = false;
-                              });
+                      cfg.ClearSerialization();
+                      cfg.UseRawJsonSerializer();
 
-                      cfg.ReceiveEndpoint("Contracts:IQuoteFormattedQuotes", ep =>
-                             {
-                                ep.ClearSerialization();
-                                ep.ConfigureConsumer<CsvConsumerQuotes>(context);
-                                ep.UseRawJsonSerializer();
-                                ep.UseRawJsonDeserializer();
-                                ep.ConfigureConsumeTopology = true;
-                              });
-                      cfg.ReceiveEndpoint("Contracts:IQuoteFormattedLog", ep =>
-                             {
-                                ep.ClearSerialization();
-                                ep.ConfigureConsumer<CsvConsumerLog>(context);
-                                ep.UseRawJsonSerializer();
-                                ep.UseRawJsonDeserializer();
-                                ep.ConfigureConsumeTopology = true;
-                              });
-                      cfg.ReceiveEndpoint("Contracts:IQuoteFormattedCount", ep =>
-                             {
-                                ep.ClearSerialization();
-                                ep.ConfigureConsumer<CsvConsumerCount>(context);
-                                ep.UseRawJsonSerializer();
-                                ep.UseRawJsonDeserializer();
-                                ep.ConfigureConsumeTopology = true;
-                              });
+
                       cfg.ConfigureEndpoints(context);
                       });
 
-
-
+                  x.AddSagaStateMachine<StateMachStateMachine, QuoteFormattedState>()
+                  .InMemoryRepository();
                   x.AddConsumer<MsgConsumer>();
                   x.AddConsumer<CsvConsumerQuotes>();
                   x.AddConsumer<CsvConsumerLog>();
                   x.AddConsumer<CsvConsumerCount>();
                 });
-
               services.AddHostedService<Worker>();
             });
   }
