@@ -16,7 +16,6 @@ message_data = {
     "Name": message
 }
 def wait() :
-    time.sleep(0)
     return None
 
 if st.button('Envoyer', on_click=wait()):
@@ -24,5 +23,6 @@ if st.button('Envoyer', on_click=wait()):
                           routing_key='',
                           body=json.dumps(message_data))
     st.success('Message sent successfully')
+
 
 connection.close()
