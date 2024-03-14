@@ -17,6 +17,7 @@ namespace GettingStarted
     }
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
+        //Création et configuration de la plateforme RabbitMQ
         Host.CreateDefaultBuilder(args)
             .ConfigureServices((hostContext, services) =>
             {
@@ -30,15 +31,15 @@ namespace GettingStarted
                           h.Password("guest");
                         });
 
-                      cfg.ClearSerialization();
-                      cfg.UseRawJsonSerializer();
+                      cfg.ClearSerialization(); // Reset la serialisation
+                      cfg.UseRawJsonSerializer(); // Serialise en Json Raw
 
 
-                      cfg.ConfigureEndpoints(context);
+                      cfg.ConfigureEndpoints(context); // Configure tout les endpoints pour créer la tuyauterie entre les handlers et les queues
                       });
 
-                  x.AddSagaStateMachine<StateMachStateMachine, QuoteFormattedState>()
-                  .InMemoryRepository();
+                  x.AddSagaStateMachine<QuotesStateMachine, QuoteFormattedState>()
+                  .InMemoryRepository(); // Utilise la mémoire interne pour les états de la saga
                   x.AddConsumer<MsgConsumer>();
                   x.AddConsumer<CsvConsumerQuotes>();
                   x.AddConsumer<CsvConsumerLog>();

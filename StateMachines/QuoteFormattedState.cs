@@ -4,7 +4,7 @@ namespace Company.StateMachines
     using MassTransit;
 
     public class QuoteFormattedState :
-        SagaStateMachineInstance
+        SagaStateMachineInstance // Contrat de la SAGA
     {
         public int CurrentState { get; set; }
 

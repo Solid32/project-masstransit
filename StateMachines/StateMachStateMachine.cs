@@ -3,55 +3,57 @@ namespace Company.StateMachines
   using Contracts;
   using MassTransit;
 
-  public class StateMachStateMachine :
-      MassTransitStateMachine<QuoteFormattedState>
+  public class QuotesStateMachine :
+      MassTransitStateMachine<QuoteFormattedState> // Création de la SagaStateMachine
   {
-    public StateMachStateMachine()
+    public QuotesStateMachine()
     {
-      InstanceState(x => x.CurrentState, Created);
+      InstanceState(x => x.CurrentState, Created); // Instance de départ
 
       Event(() => QuoteFormatted, x => x.CorrelateById(context => context.Message.CorrelationId));
-      Event(() => QuoteFormattedCount , x => x.CorrelateById(context => context.Message.CorrelationId));
+      Event(() => QuoteFormattedQuote , x => x.CorrelateById(context => context.Message.CorrelationId));
 
       Initially(
-          When(QuoteFormatted)
+          When(QuoteFormatted) //Saga déclenché par event QuoteFormatted reçu
               .Then(context =>
       {
-        context.Saga.Name = context.Message.Name;
+        context.Saga.Name = context.Message.Name; // Update l'objet Saga
         QuoteFormattedQuotes qfq = new()
         {
           CorrelationId = context.Saga.CorrelationId,
           Name = context.Saga.Name,
           Timestamp = context.Saga.Timestamp
         };
-        context.Publish(qfq);
+        context.Publish(qfq); // Publie un nouvel Event
       }
         )
               .TransitionTo(Continue)
       );
       During(Continue,
-      When(QuoteFormattedCount)
+      When(QuoteFormattedQuote) // Etape déclenchée par QuoteFormattedQuote reçu
         .Then(context =>
               {
         context.Saga.Name = context.Message.Name;
+        // Crée un nouvel objet
         QuoteFormattedCount qfc = new()
         {
           CorrelationId = context.Saga.CorrelationId,
           Name = context.Saga.Name
         };
-        context.Publish(qfc);
+        context.Publish(qfc); // Publie un nouvel Event
       }
         )
         .TransitionTo(Complete)
       );
       SetCompletedWhenFinalized();
     }
-
+    // Description des états de la Saga
     public State Created { get; private set; }
     public State Continue { get; private set; }
     public State Complete {get; private set; }
 
+    // Description des Events de la Saga
     public Event<IQuoteFormatted> QuoteFormatted { get; private set; }
-    public Event<QuoteFormattedQuotes> QuoteFormattedCount { get; private set; }
+    public Event<QuoteFormattedQuotes> QuoteFormattedQuote { get; private set; }
   }
   }
