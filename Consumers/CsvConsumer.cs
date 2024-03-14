@@ -6,7 +6,8 @@ using System.IO;
 
 namespace Consumers
 {
-  public class MsgConsumer : IConsumer<IQuoteSubmitted> // Premier consumer formattage du message, crétion de l'enveloppe MT.
+  // Premier consumer formattage du message, crétion de l'enveloppe MT.
+  public class MsgConsumer : IConsumer<IQuoteSubmitted>
   {
     public Task Consume(ConsumeContext<IQuoteSubmitted> context)
     {
@@ -61,7 +62,8 @@ namespace Consumers
       string lineToWrite = string.Join(separator, messagecsv2) + Environment.NewLine;
       try
       {
-        File.AppendAllText(logFile, lineToWrite); // Ajoute à la ligne
+        // Ajoute à la ligne
+        File.AppendAllText(logFile, lineToWrite);
         Console.WriteLine("Logs ajoutés au csv! ");
       }
       catch (Exception ex)
