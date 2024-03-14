@@ -11,7 +11,7 @@ namespace Consumers
   {
     public Task Consume(ConsumeContext<IQuoteSubmitted> context)
     {
-      // Crée un nouveau message MyMessage avec le contenant provenant de l'UI
+      // Crée un nouveau message MyMessage avec le contenant provenant de l'UI et nouveau ID
       var formattedQuote = new MyMessage
       {
         CorrelationId = Guid.NewGuid(),
