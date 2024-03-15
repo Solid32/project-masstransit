@@ -25,3 +25,5 @@ TestResults.xml
  data/.~lock.quotes.csv#
 *.dll
 *.pdb
+bin/*
+obj/*
