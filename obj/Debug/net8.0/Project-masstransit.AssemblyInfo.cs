@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Project-masstransit")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a100cb21d9a8d746065d1aa0f30064291e33f79e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f255a0a877371736c42124bddc169f6006e81dc7")]
 [assembly: System.Reflection.AssemblyProductAttribute("Project-masstransit")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Project-masstransit")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
