@@ -3,15 +3,18 @@
 {
 	"name": "C# (.NET)",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/dotnet:1-8.0-bookworm",
+	"image": "mcr.microsoft.com/devcontainers/dotnet:8.0-jammy",
 	"features": {
-		"ghcr.io/devcontainers/features/python:1": {},
-    "ghcr.io/devcontainers-contrib/features/pipx-package": {
-      "package": "streamlit",
-      "version": "latest",
-      "interpreter": "python3"
-    }
-
+		"ghcr.io/devcontainers/features/python:1": {
+			"version": "latest"
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-dotnettools.csdevkit"
+			]
+		}
 	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
@@ -26,11 +29,11 @@
 	// }
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	//"postCreateCommand": "pip install streamlit",
+	"postCreateCommand": "pip install -r requirements.txt",
 
 	// Configure tool-specific properties.
 	// "customizations": {},
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	"remoteUser": "root"
+	// "remoteUser": "root"
 }
